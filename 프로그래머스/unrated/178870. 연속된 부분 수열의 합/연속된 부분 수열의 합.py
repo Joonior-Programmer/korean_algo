@@ -3,25 +3,18 @@ def solution(sequence, k):
     ret = [0, n]
     curr, i, j = sequence[0], 0, 0
     
-    while j < n-1:
+    while j < n:
         if curr == k and ret[1] - ret[0] > j - i:
             ret = [i, j]
-            j += 1
-            curr += sequence[j]
+            curr -= sequence[i]
+            i += 1
         elif curr < k:
+            if j + 1 == n:
+                break
             j += 1
             curr += sequence[j]
         else:
             curr -= sequence[i]
             i += 1
-    
-    while i < n:
-        if curr == k and ret[1] - ret[0] > j - i:
-            ret = [i, j]
-        elif curr > k:
-            curr -= sequence[i]
-            i += 1
-        else:
-            break
         
     return ret
